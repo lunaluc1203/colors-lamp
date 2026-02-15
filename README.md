@@ -140,6 +140,16 @@ Test using Postman, CURL, ARC, or Swagger.
 
 ---
 
+## Running the Application
+
+After deployment:
+
+1. Open your browser.
+2. Navigate to your domain or droplet IP address:
+   http://your-domain.com
+3. The login page will load.
+4. Use test credentials stored in the database to log in.
+
 ## Security Notes
 
 - Passwords are hashed using MD5 before storage.
