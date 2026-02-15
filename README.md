@@ -150,6 +150,8 @@ After deployment:
 3. The login page will load.
 4. Use test credentials stored in the database to log in.
 
+---
+
 ## Security Notes
 
 - Passwords are hashed using MD5 before storage.
@@ -165,6 +167,12 @@ After deployment:
 - Assumes MySQL user permissions are granted.
 - No HTTPS configuration included.
 - No advanced authentication or token-based session management implemented.
+
+---
+
+## AI Usage
+
+Portions of this project documentation were refined with the assistance of AI tools to improve formatting and clarity. All application code was implemented and tested by the student.
 
 ---
 
