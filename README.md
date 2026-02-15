@@ -1,334 +1,163 @@
-\# COLORS LAMP Application
+# 🎨 COLORS LAMP Application
 
-
-
-\## Overview
-
-
+## Overview
 
 The COLORS LAMP Application is a full-stack web application built using the LAMP stack (Linux, Apache, MySQL, PHP). It allows users to log in and manage color entries stored in a MySQL database hosted on a DigitalOcean Ubuntu droplet.
 
-
-
 This project demonstrates:
 
-
-
-\- Backend API development using PHP
-
-\- MySQL database creation and management
-
-\- Frontend integration using HTML, CSS, and JavaScript
-
-\- Deployment to a remote Linux server
-
-\- Version control best practices using Git
-
-
+- Backend API development using PHP
+- MySQL database creation and management
+- Frontend integration using HTML, CSS, and JavaScript
+- Deployment to a remote Linux server
+- Version control best practices using Git
 
 ---
 
+## Technologies Used
 
-
-\## Technologies Used
-
-
-
-\- Linux (Ubuntu Droplet on DigitalOcean)
-
-\- Apache Web Server
-
-\- MySQL Database
-
-\- PHP (Backend API Endpoints)
-
-\- JavaScript (Client-side logic)
-
-\- HTML5 \& CSS3
-
-\- MD5 Hashing (Client-side password hashing)
-
-\- Git \& GitHub
-
-
+- Linux (Ubuntu Droplet on DigitalOcean)
+- Apache Web Server
+- MySQL Database
+- PHP (Backend API Endpoints)
+- JavaScript (Client-side logic)
+- HTML5 & CSS3
+- MD5 Password Hashing
+- Git & GitHub
 
 ---
 
+## Project Structure
 
-
-\## Project Structure
-
-
-
+```
 colors-lamp/
-
 │
-
 ├── api/
-
-│ ├── AddColor.php
-
-│ ├── Login.php
-
-│ └── SearchColors.php
-
+│   ├── AddColor.php
+│   ├── Login.php
+│   └── SearchColors.php
 │
-
 ├── public/
-
-│ ├── index.html
-
-│ ├── color.html
-
-│ ├── css/
-
-│ │ └── styles.css
-
-│ ├── js/
-
-│ │ ├── code.js
-
-│ │ └── md5.js
-
-│ └── images/
-
+│   ├── index.html
+│   ├── color.html
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   ├── code.js
+│   │   └── md5.js
+│   └── images/
 │
-
 ├── README.md
-
 ├── LICENSE
-
 └── .gitignore
-
-
-
-yaml
-
-Copy code
-
-
+```
 
 ---
 
+## Database Setup
 
+### Create Database
 
-\## Database Setup
-
-
-
-\### 1️⃣ Create the Database
-
-
-
-```sql
-
+```
 CREATE DATABASE COP4331;
-
 USE COP4331;
+```
 
-2️⃣ Create Tables
+### Create Tables
 
-sql
-
-Copy code
-
+```
 CREATE TABLE Users (
-
-&nbsp; ID INT NOT NULL AUTO\_INCREMENT,
-
-&nbsp; FirstName VARCHAR(50) NOT NULL,
-
-&nbsp; LastName VARCHAR(50) NOT NULL,
-
-&nbsp; Login VARCHAR(50) NOT NULL,
-
-&nbsp; Password VARCHAR(50) NOT NULL,
-
-&nbsp; PRIMARY KEY (ID)
-
+  ID INT NOT NULL AUTO_INCREMENT,
+  FirstName VARCHAR(50) NOT NULL,
+  LastName VARCHAR(50) NOT NULL,
+  Login VARCHAR(50) NOT NULL,
+  Password VARCHAR(50) NOT NULL,
+  PRIMARY KEY (ID)
 );
-
-
 
 CREATE TABLE Colors (
-
-&nbsp; ID INT NOT NULL AUTO\_INCREMENT,
-
-&nbsp; Name VARCHAR(50) NOT NULL,
-
-&nbsp; UserID INT NOT NULL,
-
-&nbsp; PRIMARY KEY (ID)
-
+  ID INT NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(50) NOT NULL,
+  UserID INT NOT NULL,
+  PRIMARY KEY (ID)
 );
+```
 
-3️⃣ Create Database User
+### Create Database User
 
-sql
-
-Copy code
-
-CREATE USER 'DB\_USERNAME' IDENTIFIED BY 'DB\_PASSWORD';
-
-GRANT ALL PRIVILEGES ON COP4331.\* TO 'DB\_USERNAME'@'%';
-
+```
+CREATE USER 'DB_USERNAME' IDENTIFIED BY 'DB_PASSWORD';
+GRANT ALL PRIVILEGES ON COP4331.* TO 'DB_USERNAME'@'%';
 FLUSH PRIVILEGES;
+```
 
-Backend Configuration
+---
+
+## Backend Configuration
 
 Inside each PHP API file, update the database connection:
 
+```
+$conn = new mysqli("localhost", "DB_USERNAME", "DB_PASSWORD", "COP4331");
+```
 
-
-php
-
-Copy code
-
-$conn = new mysqli("localhost", "DB\_USERNAME", "DB\_PASSWORD", "COP4331");
-
-Replace:
-
-
-
-DB\_USERNAME
-
-
-
-DB\_PASSWORD
-
-
-
-With your actual MySQL credentials.
-
-
+Replace `DB_USERNAME` and `DB_PASSWORD` with your MySQL credentials.
 
 Database credentials are intentionally not included in this repository.
 
+---
 
+## API Endpoints
 
-API Endpoints
+- /api/Login.php — Authenticates a user  
+- /api/AddColor.php — Adds a new color entry  
+- /api/SearchColors.php — Searches colors by user  
 
-All API endpoints are located inside the /api directory.
-
-
-
-Endpoint	Description
-
-Login.php	Authenticates a user
-
-AddColor.php	Adds a new color entry
-
-SearchColors.php	Searches colors by user
-
-
-
-Example Usage (POST Request with JSON Body)
-
-bash
-
-Copy code
-
-/api/Login.php
-
-/api/AddColor.php
-
-/api/SearchColors.php
-
-Test using:
-
-
-
-Postman
-
-
-
-CURL
-
-
-
-ARC
-
-
-
-Swagger
-
-
+All requests should use:
 
 Content-Type: application/json
 
+Test using Postman, CURL, ARC, or Swagger.
 
+---
 
-Deployment Instructions (DigitalOcean LAMP)
+## Deployment (DigitalOcean LAMP)
 
-Create a LAMP Ubuntu droplet on DigitalOcean.
+1. Create a LAMP Ubuntu droplet on DigitalOcean.
+2. SSH into the droplet.
+3. Navigate to:
 
-
-
-SSH into the droplet.
-
-
-
-Navigate to:
-
-
-
-css
-
-Copy code
-
+```
 /var/www/html
+```
 
-Upload:
+4. Upload:
+   - API files → /var/www/html/LAMPAPI
+   - Frontend files → /var/www/html
+5. Configure the MySQL database and user.
+6. Point your domain DNS A record to your droplet IP address.
+7. Test endpoints using Postman or CURL.
 
+---
 
+## Security Notes
 
-API files → /var/www/html/LAMPAPI
+- Passwords are hashed using MD5 before storage.
+- Database credentials are not committed to version control.
+- This project is for educational purposes only.
+- Production-level security hardening is not implemented.
 
+---
 
+## Assumptions & Limitations
 
-Frontend files → /var/www/html
+- Assumes a properly configured LAMP stack.
+- Assumes MySQL user permissions are granted.
+- No HTTPS configuration included.
+- No advanced authentication or token-based session management implemented.
 
+---
 
+## License
 
-Configure the MySQL database and user.
-
-
-
-Point your domain DNS A record to your droplet IP address.
-
-
-
-Test endpoints using Postman or CURL.
-
-
-
-Security Notes
-
-Passwords are hashed using MD5 before being stored.
-
-
-
-Database credentials are not committed to version control.
-
-
-
-This project is for educational purposes and does not include production-level security hardening.
-
-
-
-Assumptions \& Limitations
-
-Assumes a properly configured LAMP stack.
-
-
-
-Assumes MySQL user permissions are granted.
-
-
-
-No HTTPS configuration included.
-
-
-
-No advanced authentication or token-based session management implemented.
-
+This project is licensed under the MIT License.
