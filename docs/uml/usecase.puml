@@ -1,0 +1,31 @@
+@startuml
+
+left to right direction
+
+actor Developer
+actor "End user" as User
+
+rectangle "LAMP color app" {
+
+  usecase "Deploy server & app files" as UC1
+  usecase "Set up database" as UC2
+  usecase "Create DB user & permissions" as UC3
+
+  usecase "Log in" as UC4
+  usecase "Add color" as UC5
+  usecase "Search colors" as UC6
+
+}
+
+Developer --> UC1
+Developer --> UC2
+Developer --> UC3
+
+User --> UC4
+User --> UC5
+User --> UC6
+
+UC5 ..> UC4 : <<include>>
+UC6 ..> UC4 : <<include>>
+
+@enduml
