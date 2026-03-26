@@ -1,0 +1,46 @@
+@startuml activity_add_color
+
+|User|
+start
+
+:Enter login & password;
+
+|System|
+:Validate credentials (DB);
+
+if (Valid?) then (yes)
+  :Store userId in session;
+  #9FE1CB:Redirect to color page;
+
+  |User|
+  :View color page;
+  :Enter color name;
+
+  |System|
+  :Validate input (POST);
+
+  if (Empty?) then (no)
+    :Save color to DB;
+    #9FE1CB:Return success;
+
+    |User|
+    #9FE1CB:Show confirmation;
+
+  else (yes)
+    #F09595:Show error;
+    |User|
+    :Enter color name;
+    note right: retry loop
+  endif
+
+else (no)
+  #F09595:Show error;
+  |User|
+  :Enter login & password;
+  note right: retry loop
+endif
+
+|User|
+stop
+
+@enduml

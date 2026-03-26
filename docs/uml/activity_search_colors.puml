@@ -1,0 +1,45 @@
+@startuml activity_search_colors
+
+|User|
+start
+
+:Enter login & password;
+
+|System|
+:Validate credentials (DB);
+
+if (Valid?) then (yes)
+  :Store userId in session;
+  #9FE1CB:Redirect to color page;
+
+  |User|
+  :View color page;
+  :Enter search term;
+
+  |System|
+  :Query DB (POST);
+
+  if (Found?) then (yes)
+    #9FE1CB:Return matching colors;
+
+    |User|
+    #9FE1CB:Display results;
+
+  else (no)
+    #FAC775:Return "no results";
+    |User|
+    :Enter search term;
+    note right: retry loop
+  endif
+
+else (no)
+  #F09595:Show error;
+  |User|
+  :Enter login & password;
+  note right: retry loop
+endif
+
+|User|
+stop
+
+@enduml
