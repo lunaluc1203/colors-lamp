@@ -1,0 +1,81 @@
+@startuml
+
+title Colors App — Class Diagram
+
+class index_html {
+  <<script>>
+  -String loginVal
+  -String passwordVal
+  +doLogin() void
+  +handleLoginResponse(data) void
+}
+
+class color_html {
+  <<script>>
+  -String searchVal
+  -String colorVal
+  -int userId
+  +addColor() void
+  +searchColors() void
+  +handleAddResponse(data) void
+  +handleSearchResponse(data) void
+  +displayColors(colors) void
+}
+
+class md5_js {
+  <<script>>
+  +md5(input: String) String
+}
+
+class Login_php {
+  <<script>>
+  -mysqli conn
+  -String login
+  -String password
+  +processRequest() JSON
+}
+
+class AddColor_php {
+  <<script>>
+  -mysqli conn
+  -int userId
+  -String color
+  +processRequest() JSON
+}
+
+class SearchColors_php {
+  <<script>>
+  -mysqli conn
+  -int userId
+  -String search
+  +processRequest() JSON
+}
+
+class User {
+  <<entity>>
+  +int ID
+  +String FirstName
+  +String LastName
+  +String Login
+  +String Password
+}
+
+class Color {
+  <<entity>>
+  +int ID
+  +String Name
+  +int UserID
+}
+
+index_html ..> md5_js : uses
+index_html ..> Login_php : <<HTTP POST>>
+color_html ..> AddColor_php : <<HTTP POST>>
+color_html ..> SearchColors_php : <<HTTP POST>>
+
+Login_php ..> User : queries
+AddColor_php ..> Color : inserts
+SearchColors_php ..> Color : queries
+
+User "1" --> "0..*" Color : owns
+
+@enduml
