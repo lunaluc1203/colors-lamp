@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "no-empty-source": true,
+    "color-no-invalid-hex": true,
+    "selector-id-pattern": null,
+    "font-family-name-quotes": null,
+    "color-hex-length": null,
+    "alpha-value-notation": null,
+    "rule-empty-line-before": null
+  }
+}

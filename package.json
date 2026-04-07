@@ -1,0 +1,30 @@
+{
+  "name": "colors-lamp",
+  "version": "1.0.0",
+  "description": "The COLORS LAMP Application is a full-stack web application built using the LAMP stack (Linux, Apache, MySQL, PHP). It allows users to log in and manage color entries stored in a MySQL database hosted on a DigitalOcean Ubuntu droplet.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunaluc1203/colors-lamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lunaluc1203/colors-lamp/issues"
+  },
+  "homepage": "https://github.com/lunaluc1203/colors-lamp#readme",
+  "devDependencies": {
+    "eslint": "^10.2.0",
+    "htmlhint": "^1.9.2",
+    "stylelint": "^17.6.0",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}
