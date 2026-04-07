@@ -20,7 +20,10 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Fix permissions
+        run: chmod -R +x node_modules/.bin
 
       - name: Lint HTML
         run: npx htmlhint "public/**/*.html"
