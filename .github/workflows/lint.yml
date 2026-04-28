@@ -1,13 +1,16 @@
-name: Lint Code
+name: Lint and Test
 
 on:
   push:
-    branches: [ ci-lint, main ]
+    branches:
+      - main
+      - assignment-5-tests
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,19 +20,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Fix permissions
-        run: chmod -R +x node_modules/.bin
+      - name: Run lint
+        run: npm run lint
 
-      - name: Lint HTML
-        run: npx htmlhint "public/**/*.html"
-
-      - name: Lint CSS
-        run: npx stylelint "public/css/**/*.css"
-
-      - name: Lint JavaScript
-        run: npx eslint "public/js/**/*.js"
+      - name: Run tests
+        run: npm test
